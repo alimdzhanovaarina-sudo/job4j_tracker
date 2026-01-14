@@ -24,5 +24,9 @@ public class Point {
 
         System.out.println("Distance: " + result);
     }
+
+    public double distance3d(Point that) {
+        return -1D;
+    }
 }
 
