@@ -25,25 +25,26 @@ public class Tracker {
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
-        if (index != -1) {
+        boolean result = index != -1;
+        if (result) {
             item.setId(id);
             items[index] = item;
-            return true;
         }
-        return false;
+        return result;
     }
 
     public boolean delete(int id) {
         int index = indexOf(id);
-        if (index != -1) {
-            int start = index + 1;
-            int length = size - index - 1;
-            System.arraycopy(items, start, items, index, length);
+        boolean result = index != -1;
+        if (result) {
+            int lengthToCopy = size - index - 1;
+            if (lengthToCopy > 0) {
+                System.arraycopy(items, index + 1, items, index, lengthToCopy);
+            }
             items[size - 1] = null;
             size--;
-            return true;
         }
-        return false;
+        return result;
     }
 
     public Item[] findAll() {
