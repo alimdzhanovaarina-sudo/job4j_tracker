@@ -24,7 +24,6 @@ public class StartUI {
             showMenu();
             System.out.print("Выбрать: ");
             int select = Integer.parseInt(scanner.nextLine());
-
             if (select == 0) {
                 System.out.println("=== Создание новой заявки ===");
                 System.out.print("Введите имя: ");
@@ -32,7 +31,6 @@ public class StartUI {
                 Item item = new Item(name);
                 tracker.add(item);
                 System.out.println("Добавленная заявка: " + item);
-
             } else if (select == 1) {
                 System.out.println("=== Вывод всех заявок ===");
                 Item[] items = tracker.findAll();
@@ -43,7 +41,6 @@ public class StartUI {
                 } else {
                     System.out.println("Хранилище еще не содержит заявок");
                 }
-
             } else if (select == 2) {
                 System.out.println("=== Редактирование заявки ===");
                 System.out.print("Введите id: ");
@@ -56,12 +53,8 @@ public class StartUI {
                 } else {
                     System.out.println("Ошибка замены заявки.");
                 }
-
             } else if (select == 6) {
                 run = false;
-                System.out.println("=== Программа завершена ===");
-            } else {
-                System.out.println("Неверный ввод. Попробуйте еще раз.");
             }
         }
     }
