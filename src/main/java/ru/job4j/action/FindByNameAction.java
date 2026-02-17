@@ -1,7 +1,9 @@
-package ru.job4j.tracker;
+package ru.job4j.action;
 
 import ru.job4j.Item;
 import ru.job4j.Tracker;
+import ru.job4j.tracker.Input;
+import ru.job4j.tracker.Output;
 
 public class FindByNameAction implements UserAction {
     private final Output out;
