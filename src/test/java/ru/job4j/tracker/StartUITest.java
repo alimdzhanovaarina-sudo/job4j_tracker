@@ -3,10 +3,8 @@ package ru.job4j.tracker;
 import org.junit.jupiter.api.Test;
 import ru.job4j.Item;
 import ru.job4j.Tracker;
+import ru.job4j.action.*;
 import ru.job4j.action.CreateAction;
-import ru.job4j.action.ExitAction;
-import ru.job4j.action.FindByIdAction;
-import ru.job4j.action.FindByNameAction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -187,4 +185,25 @@ class StartUITest {
         );
     }
 
+    @Test
+    void whenInvalidExit() {
+        Output output = new StubOutput();
+        Input input = new MockInput(
+                new String[] {/* Пункты меню: неверный, верный. */}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = new UserAction[]{
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Завершить программу" + ln
+                        + "Неверный ввод, вы можете выбрать: 0 .. 0" + ln
+                        + "Меню:" + ln
+                        + "0. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
 }
