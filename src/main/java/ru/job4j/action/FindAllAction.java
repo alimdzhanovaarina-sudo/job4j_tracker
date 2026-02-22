@@ -4,8 +4,6 @@ import ru.job4j.Item;
 import ru.job4j.Tracker;
 import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Output;
-import ru.job4j.action.UserAction;
-
 
 public class FindAllAction implements UserAction {
     private final Output out;

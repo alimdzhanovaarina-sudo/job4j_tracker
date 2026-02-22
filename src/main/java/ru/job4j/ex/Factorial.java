@@ -11,6 +11,7 @@ public class Factorial {
         }
         return result;
     }
+
     public static void main(String[] args) {
         new Factorial().calc(-1);
     }

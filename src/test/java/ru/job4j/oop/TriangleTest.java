@@ -20,7 +20,7 @@ public class TriangleTest {
     public void when00and40and04Minus1() {
         Point a = new Point(0, 0);
         Point b = new Point(4, 0);
-        Point c = new Point(0, 4);
+        Point c = new Point(0, 0);
         Triangle triangle = new Triangle(a, b, c);
         double result = triangle.area();
         double expected = -1;

@@ -19,7 +19,6 @@ public class Point {
         this.z = z;
     }
 
-
     public double distance(Point that) {
         return sqrt(pow(this.x - that.x, 2) + pow(this.y - that.y, 2));
     }

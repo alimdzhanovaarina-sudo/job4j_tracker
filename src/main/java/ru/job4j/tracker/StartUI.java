@@ -1,10 +1,7 @@
 package ru.job4j.tracker;
 
 import ru.job4j.Tracker;
-import ru.job4j.action.CreateAction;
-import ru.job4j.action.ExitAction;
-import ru.job4j.action.FindByIdAction;
-import ru.job4j.action.FindByNameAction;
+import ru.job4j.action.*;
 
 public class StartUI {
     private final Output output;
@@ -18,6 +15,10 @@ public class StartUI {
         while (run) {
             showMenu(actions);
             int select = input.askInt("Выбрать: ");
+            if (select < 0 || select >= actions.length) {
+                output.println("Неверный ввод, вы можете выбрать: 0 .. " + (actions.length - 1));
+                continue;
+            }
             UserAction action = actions[select];
             run = action.execute(input, tracker);
         }
@@ -32,7 +33,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput(output, new ConsoleInput());
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new CreateAction(output),
@@ -43,7 +44,6 @@ public class StartUI {
                 new FindByNameAction(output),
                 new ExitAction(output)
         };
-
         new StartUI(output).init(input, tracker, actions);
     }
 }

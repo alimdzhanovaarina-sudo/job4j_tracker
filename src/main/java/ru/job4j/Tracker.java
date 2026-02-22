@@ -9,6 +9,7 @@ public class Tracker {
 
     public Item add(Item item) {
         item.setId(ids++);
+        items[size++] = item;
         return item;
     }
 
@@ -50,7 +51,6 @@ public class Tracker {
         }
         return result;
     }
-
 
     public Item[] findByName(String key) {
         Item[] result = new Item[size];

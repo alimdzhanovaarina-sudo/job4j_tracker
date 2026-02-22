@@ -11,7 +11,6 @@ public class Battery {
         return "My charge: " + load + "%";
     }
 
-
     public void exchange(Battery another) {
         another.load = another.load + this.load;
         this.load = 0;

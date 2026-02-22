@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import ru.job4j.Item;
 import ru.job4j.Tracker;
 import ru.job4j.action.*;
-import ru.job4j.action.CreateAction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,7 +13,7 @@ class StartUITest {
     void whenCreateItem() {
         Output output = new StubOutput();
         Input input = new MockInput(
-                new String[] {"0", "Item name", "1"}
+                new String[]{"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -32,7 +31,7 @@ class StartUITest {
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input input = new MockInput(
-                new String[] {"0", String.valueOf(item.getId()), replacedName, "1"}
+                new String[]{"0", String.valueOf(item.getId()), replacedName, "1"}
         );
         UserAction[] actions = {
                 new ReplaceAction(output),
@@ -48,7 +47,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Deleted item"));
         Input input = new MockInput(
-                new String[] {"0", String.valueOf(item.getId()), "1"}
+                new String[]{"0", String.valueOf(item.getId()), "1"}
         );
         UserAction[] actions = {
                 new DeleteAction(output),
@@ -62,7 +61,7 @@ class StartUITest {
     void whenExit() {
         Output output = new StubOutput();
         Input input = new MockInput(
-                new String[] {"0"}
+                new String[]{"0"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -71,8 +70,9 @@ class StartUITest {
         new StartUI(output).init(input, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(output.toString()).isEqualTo(
-                "Menu:" + ln +
-                        "0. Exit Program" + ln
+                "Меню:" + ln
+                        + "0. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
         );
     }
 
@@ -83,7 +83,7 @@ class StartUITest {
         Item one = tracker.add(new Item("test1"));
         String replaceName = "New Test Name";
         Input input = new MockInput(
-                new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
+                new String[]{"0", String.valueOf(one.getId()), replaceName, "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new ReplaceAction(output),
@@ -96,7 +96,7 @@ class StartUITest {
                         + "0. Изменить заявку" + ln
                         + "1. Завершить программу" + ln
                         + "=== Редактирование заявки ===" + ln
-                        + "Заявка изменена успешно." + ln
+                        + "Заявка изменена." + ln
                         + "Меню:" + ln
                         + "0. Изменить заявку" + ln
                         + "1. Завершить программу" + ln
@@ -110,7 +110,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test1"));
         Input input = new MockInput(
-                new String[] {"0", "1"}
+                new String[]{"0", "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new FindAllAction(output),
@@ -122,7 +122,7 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать все заявки" + ln
                         + "1. Завершить программу" + ln
-                        + "=== Показать все заявки ===" + ln
+                        + "=== Вывод всех заявок ===" + ln
                         + item + ln
                         + "Меню:" + ln
                         + "0. Показать все заявки" + ln
@@ -137,7 +137,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test1"));
         Input input = new MockInput(
-                new String[] {"0", item.getName(), "1"}
+                new String[]{"0", item.getName(), "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new FindByNameAction(output),
@@ -149,7 +149,7 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать заявки по имени" + ln
                         + "1. Завершить программу" + ln
-                        + "=== Показать заявки по имени ===" + ln
+                        + "=== Поиск заявок по имени ===" + ln
                         + item + ln
                         + "Меню:" + ln
                         + "0. Показать заявки по имени" + ln
@@ -164,7 +164,7 @@ class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test1"));
         Input input = new MockInput(
-                new String[] {"0", String.valueOf(item.getId()), "1"}
+                new String[]{"0", String.valueOf(item.getId()), "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new FindByIdAction(output),
@@ -176,7 +176,7 @@ class StartUITest {
                 "Меню:" + ln
                         + "0. Показать заявку по id" + ln
                         + "1. Завершить программу" + ln
-                        + "=== Показать заявку по id ===" + ln
+                        + "=== Поиск заявки по id ===" + ln
                         + item + ln
                         + "Меню:" + ln
                         + "0. Показать заявку по id" + ln
@@ -189,7 +189,7 @@ class StartUITest {
     void whenInvalidExit() {
         Output output = new StubOutput();
         Input input = new MockInput(
-                new String[] {/* Пункты меню: неверный, верный. */}
+                new String[]{"3", "0"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = new UserAction[]{
