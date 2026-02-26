@@ -2,6 +2,7 @@ package ru.job4j;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import ru.job4j.tracker.Tracker;
 
 public class TrackerTest {
     @Test
