@@ -2,7 +2,6 @@ package ru.job4j.bank;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import java.util.List;
 
 class BankServiceTest {
     @Test
