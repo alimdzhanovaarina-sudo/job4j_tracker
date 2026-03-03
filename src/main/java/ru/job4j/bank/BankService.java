@@ -1,4 +1,4 @@
-package ru.job4j.bank; // Убедись, что пакет соответствует структуре проекта
+package ru.job4j.bank;
 
 import java.util.*;
 
