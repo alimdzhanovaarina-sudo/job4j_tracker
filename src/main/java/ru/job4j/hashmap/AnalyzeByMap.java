@@ -3,6 +3,7 @@ package ru.job4j.hashmap;
 import java.util.*;
 
 public class AnalyzeByMap {
+
     public static double averageScore(List<Pupil> pupils) {
         double sum = 0;
         int count = 0;
@@ -12,18 +13,17 @@ public class AnalyzeByMap {
                 count++;
             }
         }
-        return sum / count;
+        return count == 0 ? 0 : sum / count;
     }
 
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
         List<Label> result = new ArrayList<>();
         for (Pupil pupil : pupils) {
-            double summa = 0;
+            double sum = 0;
             for (Subject subject : pupil.subjects()) {
-                summa += subject.score();
+                sum += subject.score();
             }
-            double average = summa / pupil.subjects().size();
-            result.add(new Label(pupil.name(), average));
+            result.add(new Label(pupil.name(), sum / pupil.subjects().size()));
         }
         return result;
     }
@@ -34,42 +34,39 @@ public class AnalyzeByMap {
             for (Subject subject : pupil.subjects()) {
                 map.merge(subject.name(), (double) subject.score(), Double::sum);
             }
-            List<Label> result = new ArrayList<>();
-            for (Map.Entry<String, Double> entry : map.entrySet()) {
-                String subjectName = entry.getKey();
-                double totalScoreForSubject = entry.getValue();
-                double averageScore = totalScoreForSubject / pupils.size();
-                result.add(new Label(subjectName, averageScore));
-            }
-            return result;
         }
+        List<Label> result = new ArrayList<>();
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            result.add(new Label(entry.getKey(), entry.getValue() / pupils.size()));
+        }
+        return result;
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
-        List<Label> studentTotalScores = new ArrayList<>();
+        List<Label> result = new ArrayList<>();
         for (Pupil pupil : pupils) {
-            double totalScore = 0;
+            double sum = 0;
             for (Subject subject : pupil.subjects()) {
-                totalScore += subject.score();
+                sum += subject.score();
             }
-            studentTotalScores.add(new Label(pupil.name(), totalScore));
+            result.add(new Label(pupil.name(), sum));
         }
-        studentTotalScores.sort(Comparator.naturalOrder());
-        return studentTotalScores.get(studentTotalScores.size() - 1);
+        result.sort(Comparator.naturalOrder());
+        return result.get(result.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        Map<String, Double> subjectScores = new LinkedHashMap<>();
+        Map<String, Double> map = new LinkedHashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                subjectScores.merge(subject.name(), (double) subject.score(), Double::sum);
+                map.merge(subject.name(), (double) subject.score(), Double::sum);
             }
         }
-        List<Label> subjectTotalScores = new ArrayList<>();
-        for (Map.Entry<String, Double> entry : subjectScores.entrySet()) {
-            subjectTotalScores.add(new Label(entry.getKey(), entry.getValue()));
+        List<Label> result = new ArrayList<>();
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            result.add(new Label(entry.getKey(), entry.getValue()));
         }
-        subjectTotalScores.sort(Comparator.naturalOrder());
-        return subjectTotalScores.get(subjectTotalScores.size() - 1);
+        result.sort(Comparator.naturalOrder());
+        return result.get(result.size() - 1);
     }
 }
