@@ -22,7 +22,7 @@ public class PhoneDictionary {
                 .or(combineAddress);
 
         var result = new ArrayList<Person>();
-        for (var person : persons) { // Теперь 'persons' будет найден
+        for (var person : persons) {
             if (combine.test(person)) {
                 result.add(person);
             }
